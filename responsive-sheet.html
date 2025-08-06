@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Responsive Web Page with Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .about {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .about img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .registration-section {
+      background-color: #ffffffcc;
+      margin: 30px auto;
+      padding: 30px;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .registration-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .registration-form input[type="text"],
+    .registration-form input[type="email"],
+    .registration-form input[type="password"],
+    .registration-form input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .registration-form input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .registration-form input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #333;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to My Responsive Page</h1>
+  </header>
+
+  <section class="about">
+    <img src="kluh.png" alt="About Image" />
+    <p>This page includes a responsive image and adjusts layout using CSS media queries.</p>
+  </section>
+
+  <h1>This is a responsive web page.</h1>
+
+  <section class="registration-section">
+    <h2>Register Now</h2>
+    <form class="registration-form" action="#" method="post">
+      <input type="text" name="fullname" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required />
+      <input type="submit" value="Register" />
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 My Responsive Page</p>
+  </footer>
+
+</body>
+</html>
