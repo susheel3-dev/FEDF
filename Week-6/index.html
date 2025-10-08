@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Weather Finder</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #dbeafe, #f1f5f9);
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+      width: 360px;
+      text-align: center;
+    }
+    input {
+      width: 65%;
+      padding: 8px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+    }
+    button {
+      padding: 9px 14px;
+      margin-left: 5px;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    .error {
+      margin-top: 12px;
+      color: #b91c1c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🌤 My Weather Finder</h2>
+    <input type="text" id="cityBox" placeholder="Type city name..." />
+    <button id="checkBtn">Check</button>
+    <div id="output" class="result"></div>
+    <div id="msg" class="error"></div>
+  </div>
+
+  <script>
+    const key = "YOUR_API_KEY_HERE"; 
+    const btn = document.getElementById("checkBtn");
+    const cityBox = document.getElementById("cityBox");
+    const output = document.getElementById("output");
+    const msg = document.getElementById("msg");
+
+    
+    async function loadWeather(cityName) {
+      try {
+        msg.textContent = "";
+        output.innerHTML = "⏳ Loading...";
+
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}&units=metric`;
+        const res = await fetch(url);
+
+        if (!res.ok) throw new Error("City not found!");
+
+        const info = await res.json();
+
+    
+        localStorage.setItem("previousCity", cityName);
+
+        
+        output.innerHTML = `
+          <h3>${info.name}, ${info.sys.country}</h3>
+          <p>🌡 Temperature: ${info.main.temp} °C</p>
+          <p>🤔 Feels like: ${info.main.feels_like} °C</p>
+          <p>☁ Condition: ${info.weather[0].description}</p>
+          <p>💧 Humidity: ${info.main.humidity}%</p>
+        `;
+      } catch (err) {
+        output.innerHTML = "";
+        msg.textContent = err.message;
+      }
+    }
+
+    
+    btn.addEventListener("click", () => {
+      const city = cityBox.value.trim();
+      if (city) {
+        loadWeather(city);
+      } else {
+        msg.textContent = "Please type a city name!";
+      }
+    });
+
+   
+    window.addEventListener("load", () => {
+      const last = localStorage.getItem("previousCity");
+      if (last) {
+        cityBox.value = last;
+        loadWeather(last);
+      }
+    });
+  </script>
+</body>
+</html>
